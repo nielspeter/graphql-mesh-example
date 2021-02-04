@@ -1,5 +1,4 @@
 const { ApolloServer, gql } = require("apollo-server");
-const { buildFederatedSchema } = require("@apollo/federation");
 
 const typeDefs = gql`
   type Query {
@@ -16,42 +15,39 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    Product(_, args) {
-      return products.find(obj => { return obj.upc === args.upc });
+    Product(root, args, context) {
+      return context.products.find(obj => { return obj.upc === args.upc });
     }
   }
 };
 
 const server = new ApolloServer({
-  schema: buildFederatedSchema([
-    {
-      typeDefs,
-      resolvers
-    }
-  ])
+  typeDefs,
+  resolvers,
+  context: {
+    products: [
+      {
+        upc: "1",
+        name: "Table",
+        price: 899,
+        weight: 100
+      },
+      {
+        upc: "2",
+        name: "Couch",
+        price: 1299,
+        weight: 1000
+      },
+      {
+        upc: "3",
+        name: "Chair",
+        price: 54,
+        weight: 50
+      }
+    ]
+  }
 });
 
 server.listen({ port: 4001 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
-
-const products = [
-  {
-    upc: "1",
-    name: "Table",
-    price: 899,
-    weight: 100
-  },
-  {
-    upc: "2",
-    name: "Couch",
-    price: 1299,
-    weight: 1000
-  },
-  {
-    upc: "3",
-    name: "Chair",
-    price: 54,
-    weight: 50
-  }
-];
