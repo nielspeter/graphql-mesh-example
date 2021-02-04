@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "concurrently \"npm:start-service-*\" \"npm:start-gateway\"",
     "start-gateway": "mesh serve",
     "start-service-products": "nodemon services/products/index.js",
     "start-service-products2": "nodemon services/products2/index.js",
