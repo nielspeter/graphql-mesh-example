@@ -1,0 +1,26 @@
+{
+  "name": "graphql-mesh-example",
+  "version": "0.5.65",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start-gateway": "mesh serve",
+    "start-service-products": "nodemon services/products/index.js",
+    "start-service-products2": "nodemon services/products2/index.js",
+    "start-services": "concurrently \"npm:start-service-*\""
+  },
+  "devDependencies": {
+    "concurrently": "5.3.0",
+    "nodemon": "2.0.6"
+  },
+  "dependencies": {
+    "@graphql-mesh/cli": "0.19.2",
+    "@graphql-mesh/graphql": "0.13.8",
+    "@graphql-mesh/merger-bare": "^0.8.11",
+    "@graphql-mesh/transform-filter-schema": "^0.8.22",
+    "@graphql-mesh/transform-prefix": "^0.6.21",
+    "apollo-server": "2.19.2",
+    "core-js": "3.8.3",
+    "graphql": "15.4.0"
+  }
+}

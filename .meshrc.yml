@@ -1,0 +1,28 @@
+sources:
+  - name: products
+    handler:
+      graphql:
+        endpoint: http://localhost:4001/graphql
+  - name: products2
+    handler:
+      graphql:
+        endpoint: http://localhost:4002/graphql
+
+additionalTypeDefs: |
+  extend type Query {
+    ProductByType(upc: String, type: String): Product
+  }
+
+additionalResolvers:
+  - ./src/mesh/additional-resolvers.js
+
+transforms:
+  - prefix:
+      value: Vo
+  - filterSchema:
+      - Query.!Product # <-- This will remove field `admins` from `Query` type
+#      - Mutation.!{addUser, removeUser} # <-- This will remove fields `addUser` and `removeUser` from `Mutation` type
+#      - User.{id,username,name,age} # <-- This will remove fields except `id`, `username`, `name` and `age`
+
+serve:
+  exampleQuery: example-query.graphql

@@ -1,0 +1,8 @@
+{
+  ProductByType(upc: "1", type: "P2") {
+    upc
+    name
+    price
+    weight
+  }
+}
