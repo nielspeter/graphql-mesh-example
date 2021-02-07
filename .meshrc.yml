@@ -9,8 +9,21 @@ sources:
         endpoint: http://localhost:4002/graphql
 
 additionalTypeDefs: |
+  type Query {
+    Products(upc: String): [Product]
+  }
   extend type Query {
     ProductByType(upc: String, type: String): Product
+    Services: [Service]
+  }
+  type Service {
+    name: String
+    method: Method
+    timeout: Int
+  }
+  enum Method {
+    PUSH
+    PULL
   }
 
 additionalResolvers:

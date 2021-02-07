@@ -1,5 +1,12 @@
 {
-  ProductByType(upc: "1", type: "P2") {
+  P1: ProductByType(upc: "1", type: "P1") {
+    upc
+    name
+    price
+    weight
+  }
+
+  P2: ProductByType(upc: "1", type: "P2") {
     upc
     name
     price
